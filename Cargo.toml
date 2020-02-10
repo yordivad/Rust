@@ -1,0 +1,9 @@
+[package]
+name = "parser"
+version = "0.1.0"
+authors = ["Roy Gonzalez"]
+edition = "2018"
+
+[dependencies]
+minifb = "*"
+png = "*"
