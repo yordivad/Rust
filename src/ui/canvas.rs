@@ -119,7 +119,9 @@ impl Canvas {
         let p = self.view.get_pixel(f.0, f.1, color);
         let page = p.y * self.size.width();
         let pos = page + p.x;
-        self.buffer[pos] = p.color();
+        if pos < self.buffer.len() {
+            self.buffer[pos] = p.color();
+        }
     }
 
     pub fn draw(&mut self, figure: impl Drawing) -> &mut Canvas {
@@ -153,22 +155,6 @@ impl Camera {
     }
 
     pub fn focus(&self, x: i32, y: i32, z: i32) -> (i32, i32) {
-        if z == 0 {
-            return (x, y);
-        }
-
-        if z > 0 {
-            let h = z + self.cz;
-            let r = self.cz as f64 / h as f64;
-            let xp = (((x - self.cx) as f64) * r) as i32 + self.cx;
-            let yp = (((y - self.cy) as f64) * r) as i32 + self.cy;
-            return (xp, yp);
-        }
-
-        let h = self.cz - z;
-        let r = self.cz as f64 / h as f64;
-        let xp = (((x - self.cx) as f64) * r) as i32 + self.cx;
-        let yp = (((y - self.cy) as f64) * r) as i32 + self.cy;
-        (xp, yp)
+        (0, 0)
     }
 }

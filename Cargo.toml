@@ -7,3 +7,4 @@ edition = "2018"
 [dependencies]
 minifb = "*"
 png = "*"
+plotly = "0.2.1"
